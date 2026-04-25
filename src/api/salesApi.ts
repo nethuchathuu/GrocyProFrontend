@@ -30,19 +30,23 @@ export const createSale = async (sale: any) => {
 // GET all sales
 export const getSales = async () => {
   const res = await fetch(API_URL);
+  if (!res.ok) throw new Error("Failed to fetch sales");
   const rows = await res.json();
+  if (!Array.isArray(rows)) return [];
   return rows.map(toFrontendSale);
 };
 
 // GET today's hourly sales for the chart
 export const getHourlySales = async (): Promise<{ hour: number; total: number }[]> => {
   const res = await fetch(`${API_URL}/reports/hourly`);
+  if (!res.ok) throw new Error("Failed to fetch hourly sales");
   return res.json();
 };
 
 // GET today's dashboard stats (revenue + sales count)
 export const getTodayStats = async (): Promise<{ today_revenue: number; today_sales_count: number }> => {
   const res = await fetch(`${API_URL}/reports/today-stats`);
+  if (!res.ok) throw new Error("Failed to fetch today stats");
   return res.json();
 };
 

@@ -26,7 +26,9 @@ const toFrontend = (row: any) => ({
 // GET all products
 export const getProducts = async () => {
   const res = await fetch(API_URL);
+  if (!res.ok) throw new Error("Failed to fetch products");
   const rows = await res.json();
+  if (!Array.isArray(rows)) return [];
   return rows.map(toFrontend);
 };
 
