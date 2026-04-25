@@ -1,0 +1,5 @@
+{
+  "name": "GrocyManager Pro",
+  "description": "A high-end, real-time grocery management system combining inventory control (Store System) and point-of-sale (Sales System) with automated low-stock alerts and advanced reporting.",
+  "requestFramePermissions": []
+}

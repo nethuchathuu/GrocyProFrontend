@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  /* ===== PRIMARY (Emerald-Teal) ===== */
+  --color-primary: #0F766E;
+  --color-primary-50: #ECFDF5;
+  --color-primary-100: #D1FAE5;
+  --color-primary-200: #A7F3D0;
+  --color-primary-300: #6EE7B7;
+  --color-primary-400: #34D399;
+  --color-primary-500: #10B981;
+  --color-primary-600: #0F766E;
+  --color-primary-700: #065F46;
+  --color-primary-800: #064E3B;
+  --color-primary-900: #022C22;
+
+  /* ===== SECONDARY ===== */
+  --color-secondary: #065F46;
+  --color-secondary-light: #0D9488;
+  --color-secondary-dark: #022C22;
+
+  /* ===== ACCENT (Gold) ===== */
+  --color-accent: #F4B400;
+  --color-accent-light: #FACC15;
+  --color-accent-dark: #D97706;
+
+  /* ===== BACKGROUND & SURFACES ===== */
+  --color-background: #0B3B36;
+  --color-background-light: #F8FAFC;
+
+  --color-surface: #134E4A;
+  --color-surface-light: #1F766F;
+
+  /* ===== STATUS COLORS ===== */
+  --color-success: #10B981;
+  --color-success-50: #ECFDF5;
+  --color-success-100: #D1FAE5;
+  --color-success-500: #10B981;
+  --color-success-600: #059669;
+  --color-success-700: #047857;
+
+  --color-warning: #F59E0B;
+  --color-warning-50: #FFFBEB;
+  --color-warning-100: #FEF3C7;
+  --color-warning-500: #F59E0B;
+  --color-warning-600: #D97706;
+  --color-warning-700: #B45309;
+
+  --color-danger: #EF4444;
+  --color-danger-50: #FEF2F2;
+  --color-danger-100: #FEE2E2;
+  --color-danger-500: #EF4444;
+  --color-danger-600: #DC2626;
+  --color-danger-700: #B91C1C;
+
+  --color-info: #38BDF8;
+  --color-info-50: #F0F9FF;
+  --color-info-100: #E0F2FE;
+  --color-info-500: #38BDF8;
+  --color-info-600: #0284C7;
+}
