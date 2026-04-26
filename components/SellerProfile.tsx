@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ArrowLeft,
   Pencil,
   Save,
   X,
-  Camera,
   User,
   Phone,
   MapPin,
@@ -38,9 +37,6 @@ const SellerProfile: React.FC<SellerProfileProps> = ({ onBack, onProfileUpdated 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState(EMPTY_FORM);
-  const [pictureFile, setPictureFile] = useState<File | null>(null);
-  const [picturePreview, setPicturePreview] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     getSeller()
@@ -61,13 +57,6 @@ const SellerProfile: React.FC<SellerProfileProps> = ({ onBack, onProfileUpdated 
       .finally(() => setLoading(false));
   }, []);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setPictureFile(file);
-    setPicturePreview(URL.createObjectURL(file));
-  };
-
   const handleEdit = () => {
     if (seller) {
       setForm({
@@ -83,8 +72,6 @@ const SellerProfile: React.FC<SellerProfileProps> = ({ onBack, onProfileUpdated 
   };
 
   const handleCancel = () => {
-    setPictureFile(null);
-    setPicturePreview(null);
     setEditing(false);
     setError(null);
   };
@@ -97,11 +84,9 @@ const SellerProfile: React.FC<SellerProfileProps> = ({ onBack, onProfileUpdated 
     setSaving(true);
     setError(null);
     try {
-      await updateSeller(form, pictureFile);
+      await updateSeller(form, null);
       const updated = await getSeller();
       setSeller(updated);
-      setPictureFile(null);
-      setPicturePreview(null);
       setEditing(false);
       onProfileUpdated?.();
     } catch {
@@ -110,8 +95,6 @@ const SellerProfile: React.FC<SellerProfileProps> = ({ onBack, onProfileUpdated 
       setSaving(false);
     }
   };
-
-  const avatarSrc = picturePreview ?? (seller?.profile_picture ?? null);
 
   const field = (
     label: string,
@@ -184,27 +167,8 @@ const SellerProfile: React.FC<SellerProfileProps> = ({ onBack, onProfileUpdated 
                 {/* Avatar */}
                 <div className="relative">
                   <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-primary-100 overflow-hidden flex items-center justify-center">
-                    {avatarSrc ? (
-                      <img src={avatarSrc} alt="Profile" className="w-full h-full object-cover" />
-                    ) : (
-                      <User className="w-10 h-10 text-primary-400" />
-                    )}
+                    <img src="/user.png" alt="Profile" className="w-full h-full object-cover" />
                   </div>
-                  {editing && (
-                    <button
-                      onClick={() => fileInputRef.current?.click()}
-                      className="absolute bottom-0 right-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center shadow-md hover:bg-primary-700 transition-colors"
-                    >
-                      <Camera className="w-4 h-4" />
-                    </button>
-                  )}
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/jpeg,image/png"
-                    className="hidden"
-                    onChange={handleImageChange}
-                  />
                 </div>
 
                 {/* Action Buttons */}
