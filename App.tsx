@@ -25,6 +25,7 @@ import { getProducts, addProduct as apiAddProduct, updateProduct as apiUpdatePro
 import { createSale as apiCreateSale, getSales } from './src/api/salesApi';
 import { getSeller } from './src/api/sellerApi';
 import { fetchDiscounts, createDiscount, updateDiscount, deleteDiscount } from './src/api/discountApi';
+import { warmUpServer } from './src/api/config';
 
 const App: React.FC = () => {
   const [activeMode, setActiveMode] = useState<AppMode>(AppMode.DASHBOARD);
@@ -40,19 +41,27 @@ const App: React.FC = () => {
 
   // Load products, sales, and seller from backend on mount
   useEffect(() => {
-    getProducts()
-      .then(data => setProducts(data))
-      .catch(err => console.error("Failed to load products:", err));
+    const init = async () => {
+      await warmUpServer();
+      // Give server a bit of time to spin up if it was asleep
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
-    getSales()
-      .then(data => setSales(data))
-      .catch(err => console.error("Failed to load sales:", err));
+      getProducts()
+        .then(data => setProducts(data))
+        .catch(err => console.error("Failed to load products:", err));
 
-    fetchDiscounts()
-      .then(data => setDiscounts(data))
-      .catch(err => console.error("Failed to load discounts:", err));
+      getSales()
+        .then(data => setSales(data))
+        .catch(err => console.error("Failed to load sales:", err));
 
-    refreshSeller();
+      fetchDiscounts()
+        .then(data => setDiscounts(data))
+        .catch(err => console.error("Failed to load discounts:", err));
+
+      refreshSeller();
+    };
+
+    init();
   }, [refreshSeller]);
 
   const lowStockProducts = useMemo(() =>
