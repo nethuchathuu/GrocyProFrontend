@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { Product, Sale, SaleItem } from '../types';
 import html2canvas from 'html2canvas';
+import { API_BASE_URL } from '../src/api/config';
 
 interface SalesSystemProps {
   products: Product[];
@@ -43,7 +44,7 @@ const SalesSystem: React.FC<SalesSystemProps> = ({ products, onSale }) => {
   const receiptRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/discounts')
+    fetch(`${API_BASE_URL}/api/discounts`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -235,7 +236,7 @@ const SalesSystem: React.FC<SalesSystemProps> = ({ products, onSale }) => {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:5000/api/discounts`);
+      const res = await fetch(`${API_BASE_URL}/api/discounts`);
       const data = await res.json();
       const match = data.find((d: any) => d.discount_code === discountCode && d.status === 'Active');
       if (!match) {
