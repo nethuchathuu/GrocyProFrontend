@@ -2,12 +2,12 @@
 
 export const API_BASE_URL = import.meta.env.DEV
   ? ''
-  : 'https://grocyprobackend-2.onrender.com';
+  : 'https://grocyprobackend.onrender.com';
 
 export const warmUpServer = async () => {
   try {
     // Always hit the real backend directly for warm-up (bypasses proxy)
-    await fetch('https://grocyprobackend-2.onrender.com/api/health', {
+    await fetch('https://grocyprobackend.onrender.com/api/health', {
       method: 'GET',
       mode: 'no-cors', // avoids CORS error even without the header
     });

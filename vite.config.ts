@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
         proxy: {
           '/api': {
-            target: 'https://grocyprobackend-2.onrender.com',
+            target: 'https://grocyprobackend.onrender.com',
             changeOrigin: true,
             secure: true,
             configure: (proxy) => {
@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
             },
           },
           '/uploads': {
-            target: 'https://grocyprobackend-2.onrender.com',
+            target: 'https://grocyprobackend.onrender.com',
             changeOrigin: true,
             secure: true,
           },
