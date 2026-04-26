@@ -205,17 +205,11 @@ const App: React.FC = () => {
               className="w-10 h-10 rounded-full overflow-hidden border border-gray-200 shadow-sm hover:ring-2 hover:ring-primary-400 transition-all flex items-center justify-center"
               title="Seller Profile"
             >
-              {seller?.profile_picture ? (
-                <img
-                  src={seller.profile_picture}
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <span className="flex items-center justify-center w-full h-full bg-gray-100">
-                  <UserCircle className="w-5 h-5 text-gray-500" />
-                </span>
-              )}
+              <img
+                src="/user.png"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
             </button>
             <div className="relative group">
               <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-full relative transition-colors">
